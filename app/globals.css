@@ -1,0 +1,267 @@
+@import "tailwindcss";
+
+/* =========================================
+   THEME CONFIGURATION - TAILWIND V4
+========================================= */
+
+@theme {
+  --color-bg: rgb(var(--bg));
+  --color-bg2: rgb(var(--bg2));
+  --color-card: rgb(var(--card));
+  --color-line: rgb(var(--line));
+  --color-txt: rgb(var(--txt));
+  --color-mut: rgb(var(--mut));
+
+  --color-accent: rgb(var(--a));
+  --color-violet: rgb(var(--b));
+  --color-warning: rgb(var(--w));
+  --color-purple: rgb(var(--k));
+  --color-success: rgb(var(--s));
+  --color-info: rgb(var(--f));
+
+  --font-sans: Arial, Helvetica, sans-serif;
+  --font-mono: "Fira Code", monospace;
+
+  --shadow-glow: var(--glow);
+
+  --animate-blink: blink 1s step-end infinite;
+  /* Custom animations */
+  --animate-blink: blink 1s step-end infinite;
+  --animate-drift: drift 25s linear infinite;
+  --animate-typing: typing 1.2s steps(40, end) forwards;
+  --animate-fadein: fadein 1.2s ease forwards;
+  --animate-grow: grow 1.2s ease-out forwards;
+  /* Marquee animation */
+--animate-scroll: scroll 40s linear infinite;
+
+@keyframes scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+  @keyframes blink {
+    50% {
+      opacity: 0;
+    }
+  }
+
+  @keyframes drift {
+    0% {
+      transform: translateY(0);
+    }
+    100% {
+      transform: translateY(-100px);
+    }
+  }
+
+  @keyframes typing {
+    from {
+      width: 0;
+    }
+    to {
+      width: calc(50 * 1ch);
+    }
+  }
+
+  @keyframes fadein {
+    from {
+      opacity: 0;
+      transform: translateY(25px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @keyframes grow {
+    from {
+      width: 0%;
+    }
+    to {
+      width: var(--w);
+    }
+  }
+  @keyframes blink {
+    50% {
+      opacity: 0;
+    }
+  }
+}
+
+/* =========================================
+   DARK THEME
+========================================= */
+
+[data-theme="dark"] {
+  color-scheme: dark;
+
+  --bg: 10 13 20;
+  --bg2: 17 22 34;
+  --card: 15 20 32;
+  --line: 31 41 55;
+  --txt: 219 228 240;
+  --mut: 132 147 168;
+
+  --a: 74 222 128;
+  --b: 167 139 250;
+  --w: 251 191 36;
+  --k: 192 132 252;
+  --s: 134 239 172;
+  --f: 125 211 252;
+
+  --glow: 0 0 40px rgb(74 222 128 / 0.12);
+}
+
+/* =========================================
+   LIGHT THEME
+========================================= */
+
+[data-theme="light"] {
+  color-scheme: light;
+
+  --bg: 246 247 251;
+  --bg2: 236 237 245;
+  --card: 255 255 255;
+  --line: 217 220 232;
+  --txt: 27 32 48;
+  --mut: 91 100 120;
+
+  --a: 15 157 88;
+  --b: 109 40 217;
+  --w: 180 83 9;
+  --k: 126 34 206;
+  --s: 21 128 61;
+  --f: 3 105 161;
+
+  --glow: 0 10px 40px rgb(60 60 120 / 0.12);
+}
+
+/* =========================================
+   BASE STYLES
+========================================= */
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 70px;
+  }
+
+  body {
+    @apply overflow-x-hidden bg-bg font-sans leading-relaxed text-txt transition-colors duration-300;
+  }
+
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+
+    background:
+      radial-gradient(circle at 15% 10%, rgb(var(--b) / 0.18), transparent 40%),
+      radial-gradient(circle at 90% 60%, rgb(var(--a) / 0.14), transparent 40%),
+      radial-gradient(rgb(var(--line)) 1px, transparent 1px);
+
+    background-size:
+      auto,
+      auto,
+      26px 26px;
+  }
+}
+
+/* =========================================
+   COMPONENT STYLES
+========================================= */
+
+@layer components {
+  .btn {
+    @apply inline-block cursor-pointer rounded-lg border border-accent bg-transparent px-6 py-3 font-mono text-sm text-accent transition duration-200 hover:-translate-y-0.5 hover:bg-accent/15;
+  }
+
+  .btn-primary {
+    @apply bg-accent font-bold text-bg hover:bg-accent hover:shadow-[0_0_28px_rgb(var(--a)/.55)];
+  }
+
+  .chip {
+    @apply inline-block rounded-full border border-line bg-card px-3.5 py-1.5 font-mono text-[.82rem] transition duration-200 hover:border-accent hover:text-accent;
+  }
+
+  .chip-sm {
+    @apply px-2.5 py-0.5 text-[.72rem] text-violet;
+  }
+
+  .window {
+    @apply overflow-hidden rounded-xl border border-line bg-card shadow-glow;
+  }
+
+  .window-bar {
+    @apply flex items-center gap-[7px] border-b border-line bg-bg2 px-3.5 py-2.5 font-mono text-xs text-mut;
+  }
+
+  .window-bar i {
+    @apply h-[11px] w-[11px] rounded-full bg-[#ff5f56];
+  }
+
+  .window-bar i:nth-child(2) {
+    @apply bg-[#ffbd2e];
+  }
+
+  .window-bar i:nth-child(3) {
+    @apply bg-[#27c93f];
+  }
+
+  .window-bar span {
+    @apply ml-2.5;
+  }
+
+  .cursor {
+    @apply ml-1 inline-block h-[1em] w-[.55em] animate-blink bg-accent align-[-.12em];
+  }
+
+  .comment {
+    @apply font-mono text-sm text-mut;
+  }
+
+  .reveal {
+    @apply translate-y-6 opacity-0 transition duration-700;
+  }
+
+  .reveal.in {
+    @apply translate-y-0 opacity-100;
+  }
+
+  .field {
+    @apply w-full resize-y rounded-lg border border-line bg-card px-3 py-2.5 text-txt outline-none transition duration-200 focus:border-accent focus:ring-[3px] focus:ring-accent/20;
+  }
+
+  .bar-fill {
+    width: 0%;
+    background: repeating-linear-gradient(
+      90deg,
+      rgb(var(--a)) 0 8px,
+      rgb(var(--a) / 0.55) 8px 10px
+    );
+  }
+}
+
+/* =========================================
+   REDUCED MOTION
+========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}
