@@ -17,6 +17,7 @@ export default function Nav() {
     try { localStorage.setItem("theme", t); } catch {}
   };
 
+<<<<<<< HEAD
   const link = "w-full border-t border-line px-5 py-3.5 font-mono text-[.82rem] text-mut transition hover:text-accent md:w-auto md:border-0 md:p-0";
   const iconBtn = "h-[38px] w-[38px] rounded-lg border border-line bg-card text-base text-txt hover:border-accent";
 
@@ -30,6 +31,18 @@ export default function Nav() {
       <div className="flex gap-2">
         <button className={iconBtn} onClick={toggle} aria-label="Toggle theme">{theme === "dark" ? "☀" : "☾"}</button>
         <button className={`${iconBtn} md:hidden`} onClick={() => setOpen(!open)} aria-label="Menu">{open ? "✕" : "☰"}</button>
+=======
+  return (
+    <header className="nav">
+      <a href="#top" className="logo">&lt;<b>{ME.handle}</b> /&gt;</a>
+      <nav className={open ? "open" : ""}>
+        {LINKS.map((l) => <a key={l} href={`#${l}`} onClick={() => setOpen(false)}>{l}</a>)}
+        <a href={ME.resume} download className="nav-resume">resume ↓</a>
+      </nav>
+      <div className="nav-actions">
+        <button className="icon-btn" onClick={toggle} aria-label="Toggle theme">{theme === "dark" ? "☀" : "☾"}</button>
+        <button className="icon-btn burger" onClick={() => setOpen(!open)} aria-label="Menu">{open ? "✕" : "☰"}</button>
+>>>>>>> 5b92ada4064abbda5173245b2a4b66ef7061cace
       </div>
     </header>
   );

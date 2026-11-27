@@ -9,6 +9,7 @@ export default function Skills() {
 
   return (
     <>
+<<<<<<< HEAD
       <div className="window reveal">
         <div className="window-bar"><i /><i /><i /><span>skills — zsh</span></div>
         <div className="flex flex-wrap gap-1 border-b border-line px-3.5 pt-2.5" role="tablist">
@@ -39,6 +40,29 @@ export default function Skills() {
             <span key={i} className="whitespace-nowrap font-mono text-mut before:text-violet before:content-['{_}_']">{m}</span>
           ))}
         </div>
+=======
+      <div className="term reveal">
+        <div className="term-bar"><i /><i /><i /><span>skills — zsh</span></div>
+        <div className="term-tabs" role="tablist">
+          {tabs.map((k) => <button key={k} className={k === tab ? "on" : ""} onClick={() => setTab(k)}>{k}</button>)}
+        </div>
+        <div className="term-body" key={tab}>
+          <p><b className="g">➜</b> <span className="p">~/skills</span> npm ls --scope=<span className="s">{tab}</span></p>
+          <p className="c">dev-brain@1.0.0 /usr/local/skills/{tab}</p>
+          {list.map((s, i) => (
+            <div className="row" key={s.name} style={{ animationDelay: `${i * 80}ms` }}>
+              <span className="tree">{i === list.length - 1 ? "└─" : "├─"}</span>
+              <span className="nm">{s.name}</span>
+              <span className="bar"><em style={{ "--w": `${s.level}%`, animationDelay: `${i * 80 + 150}ms` } as CSSProperties} /></span>
+              <span className="pc">{s.level}%</span>
+            </div>
+          ))}
+          <p><b className="g">➜</b> <span className="p">~/skills</span> <span className="cursor" /></p>
+        </div>
+      </div>
+      <div className="marquee" aria-hidden>
+        <div>{[...MARQUEE, ...MARQUEE].map((m, i) => <span key={i}>{m}</span>)}</div>
+>>>>>>> 5b92ada4064abbda5173245b2a4b66ef7061cace
       </div>
     </>
   );
